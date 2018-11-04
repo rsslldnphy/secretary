@@ -249,7 +249,8 @@
        (when-let [[_ & ms] (re-matches* re route)]
          (->> (interleave params (map decode ms))
               (partition 2)
-              (merge-with vector {})))))))
+              (map (partial apply hash-map))
+              (apply merge-with vector {})))))))
 
 ;;----------------------------------------------------------------------
 ;; Route rendering
